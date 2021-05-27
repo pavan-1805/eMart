@@ -8,6 +8,7 @@ import { IconButton, makeStyles } from '@material-ui/core'
 import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
 import Login from './Login'
 import Products from './Products'
+import GoogleLogout from 'react-google-login'
 
 const useStyles = makeStyles((theme)=>({
     title: {
@@ -35,17 +36,20 @@ function Header() {
     const classes = useStyles();
     const [loggedIn, setLoggedIn] = useState(false)
     const [userName, setUserName] = useState("")
+    const [userData, setUserData] = useState(null)
     const history=useHistory()
 
-    const get=(val)=>{
-        console.log("val",val);
+    const get=(username,userdata)=>{
         setLoggedIn(true)
-        setUserName(val)
+        setUserData(userdata)
+        setUserName(username)
     }
-    const logOut = () => {
-        localStorage.clear();
-        // history.push('./login')
-        return <Redirect to="/login"/>
+    console.log(userData);
+    const logout = () => {
+        console.log("pavan");
+        console.log(userData);
+        setLoggedIn(false)
+        setUserData(null)    
 
     }
     
@@ -98,15 +102,22 @@ function Header() {
                        <Link to="/myprofile" className={classes.link}>My Profile</Link> 
                     </Button>
                     
-                    <Button 
-                        color="inherit" 
-                        variant="outlined" 
-                        className={classes.button}
-                        onClick={logOut}
-                                                
-                    >
-                       Logout
-                    </Button>
+                    
+                        <GoogleLogout
+                            clientId="95947302818-jn3rhg9dshps5lpc2ih63k069tjcr6jf.apps.googleusercontent.com"
+                            render = {(renderProps) => (
+                                <Button
+                                    onClick={renderProps.onClick}
+                                    className = {classes.button}
+                                    color="inherit" 
+                                    variant="outlined"
+                                >Logout</Button>
+                            )}
+                            onLogoutSuccess={logout}
+                            >
+                            </GoogleLogout>
+                       
+                    
                     </>
     
                     }

@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import { Button, makeStyles } from '@material-ui/core';
+import { Button, Container, makeStyles } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+import ProductCard from './ProductCard'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const useStyles = makeStyles((theme)=>({
     media : {
@@ -10,6 +14,11 @@ const useStyles = makeStyles((theme)=>({
     },
     text : {
 
+    },
+    GridItem : {
+        marginTop : 50,
+        marginBottom : 30,
+        
     }
 
 }))
@@ -32,24 +41,32 @@ function Products() {
 
     
     return (
-        <div>
-            <h1>PRODUCTS</h1>
+        <Container>
+            <div>
+            <Typography gutterBottom variant="h4" component="h2">
+            PRODUCTS
+          </Typography>
+          </div>
+          <ShoppingCartIcon /> 
+          <Typography gutterBottom variant="h6" component="h2">
+            Items
+          </Typography>
+
+            <Grid container>            
             {
                 products.map(product => {
                     return (
-                    <div  key={product.albumId}>
-                    <Avatar className={classes.media} alt={product.id} src={product.url} />
-                    <Typography className={classes.text}>{product.title}</Typography>
-                    <Button
-                    variant="contained"
-                    color="secondary">Add to Cart</Button>
-                    </div>
+                    <Grid item  key={product.albumId} xs={12} md={6} lg={4} className={classes.GridItem}>
+                       <ProductCard product={product}/>
+                    </Grid>
+                    
                     )
                     
                 })
             }
+            </Grid>
             
-        </div>
+        </Container>
     )
 }
 
