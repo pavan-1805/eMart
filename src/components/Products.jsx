@@ -28,12 +28,10 @@ function Products() {
     const [products, setProducts] = useState(Array)
     
     useEffect(async ()=>{
-
-       const res = await axios.get('http://localhost:8080/pages')
+       const res = await axios.get('http://localhost:8000/pages')
        const result = await res.data[0].body.content[0].items
        setProducts([...result])
-
-       //console.log(res.data[0].body.content[0].items);
+       console.log(res.data[0].body.content[0].items);
              
 
     },[])

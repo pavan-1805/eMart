@@ -11,10 +11,17 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    minHeight : 400
+    minHeight: 400
   },
   media: {
     height: 200,
+    // maxWidth: 100,
+    // maxHeight: 100
+  //   maxWidth: 100,
+  // maxHeight: 100,
+  // margin: "auto",
+  // display: "block",
+
   },
 });
 
@@ -33,16 +40,16 @@ function ProductCard(props) {
           <Typography gutterBottom variant="h5" component="h2">
             {props.product.title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-              description            
-          </Typography>
+          {/* <Typography variant="body2" color="textSecondary" component="p">
+            description
+          </Typography> */}
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary" variant="outlined">
           Add to Cart
         </Button>
-        
+
       </CardActions>
     </Card>
   );
