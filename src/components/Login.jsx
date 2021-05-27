@@ -42,8 +42,6 @@ function Login(props) {
     const [imageUrl, setImageUrl] = useState("")
     const [move, setMove] = useState(false)
     const history = useHistory()
-
-
     const responseGoogle = (response) => {        
         console.log("response",response);
         console.log(response.profileObj);
