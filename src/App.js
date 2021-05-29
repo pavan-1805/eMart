@@ -1,6 +1,5 @@
-import Header from './components/Header';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core'
-import { purple } from '@material-ui/core/colors';
+
 import './App.css'
 
 import Head from './components/head'

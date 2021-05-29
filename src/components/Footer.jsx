@@ -1,8 +1,7 @@
 import React from 'react'
 import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
-import { Link, makeStyles, Typography } from '@material-ui/core'
+import { makeStyles, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles((theme)=>({
     footer : {
@@ -17,7 +16,7 @@ function Footer() {
             <Box className={classes.footer}>
                 <Container maxWidth="lg">
                     <Typography align="center" color="">
-                       Copyright &copy;{new Date().getFullYear()} e-MART INDIA, Inc. All rights resrved
+                       Copyright &copy;{new Date().getFullYear()} e-MART INDIA, Inc. All rights reserved
                     </Typography>
 
                 </Container>

@@ -1,5 +1,5 @@
 import React,{ useState} from 'react'
-import {BrowserRouter as Router , Switch, Link, Route, useHistory, Redirect} from 'react-router-dom'
+import {BrowserRouter as Router , Switch, Link, Route } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -37,30 +37,33 @@ function Header() {
     const [loggedIn, setLoggedIn] = useState(false)
     const [userName, setUserName] = useState("")
     const [userData, setUserData] = useState(null)
-    const history=useHistory()
 
-    const get=(username,userdata)=>{
+    const get=(userdata,username,logVal)=>{
+        if(logVal){
         setLoggedIn(true)
-        setUserData(userdata)
         setUserName(username)
+        }
+        console.log(userdata,logVal);
+        setUserData(userdata)
     }
+
     console.log(userData);
     const logout = () => {
         console.log("pavan");
         console.log(userData);
         setLoggedIn(false)
-        setUserData(null)    
+        setUserData(null)   
 
     }
     
     return (
         <Router>
+            
             <AppBar 
                 position="static" 
                 color="primary"
                 elevation={0}
-            >   
-                   
+            >      
                 <Toolbar>
                     <IconButton 
                         edge="start" 

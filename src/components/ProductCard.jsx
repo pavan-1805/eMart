@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -9,42 +9,50 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-    minHeight : 400
+  root: {    
+    maxWidth: 350,
+    minHeight : 400,
   },
   media: {
+    marginLeft : 90,
     height: 200,
+    width : 150
   },
+  
 });
 
 function ProductCard(props) {
   const classes = useStyles();
+  const [count, setCount] = useState(1)
+ 
+  const IncreaseCount = () => {
+    console.log(count);
+    setCount(count+1)
+    props.sendCount(count) 
+     
+  }
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea className={classes.area}>
         <CardMedia
           className={classes.media}
           image={props.product.url}
           title="product"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h6" component="h2">
             {props.product.title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-              description            
-          </Typography>
-        </CardContent>
+          </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" variant="outlined">
+        <Button size="small" color="primary" variant="outlined" onClick={()=>IncreaseCount()}>
           Add to Cart
         </Button>
-        
-      </CardActions>
+        </CardActions>
     </Card>
   );
 }
+
 export default ProductCard

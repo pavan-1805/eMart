@@ -15,19 +15,22 @@ const useStyles = makeStyles((theme)=>({
         textDecoration : "none"
     },
     root : {
-      marginTop : 40,
-      marginLeft : 300,
-      marginRight : 300
+      marginTop : 40,   
+      marginBottum : 40,
+      marginLeft : 500,
+      marginRight : 100,   
+      maxWidth : 400
     },
-    media : {
-        
-        height: 200,
-        width: '20%'
+    media : {  
+      marginTop : 40,   
+      marginBottum : 50,
+      marginLeft : 100,
+      marginRight : 100,   
+      height: 200,
+       
     },
     button : {
-        direction:"column",
-        alignItems: 'center',
-        justifyContent: 'center',
+      marginLeft : 150,
     }
 }))
 
@@ -35,34 +38,34 @@ function Login(props) {
     const classes = useStyles();
 
     const [isLoggedin, setIsLoggedin] = useState(false)
-    const [userData, setUserData] = useState([])
+    const [userData, setUserData] = useState(null)
     const [firstName, setFirstName] = useState("")
     const [middleName, setMiddleName] = useState("")
     const [email, setEmail] = useState("")
     const [imageUrl, setImageUrl] = useState("")
     const [move, setMove] = useState(false)
-    const history = useHistory()
+
+
 
 
     const responseGoogle = (response) => {        
         console.log("response",response);
         console.log(response.profileObj);
-        
         setUserData(response.profileObj)
-        console.log(userData);
-
-        setIsLoggedin(true)
+        if(response.profileObj){
+          setIsLoggedin(true)
+        }
         setFirstName(response.profileObj.givenName)
         setMiddleName(response.profileObj.familyName)
         setEmail(response.profileObj.email)
         setImageUrl(response.profileObj.imageUrl)
+        
 
-        props.send(response.profileObj.givenName,userData,isLoggedin)
+        console.log(response.profileObj.givenName,isLoggedin);
 
-        let data = JSON.stringify(response.profileObj.email)
-        localStorage.setItem("user",data)
            
     }
+    props.send(userData,firstName,isLoggedin);
     const moveTo =() => {
         setMove(true)
     }
@@ -73,8 +76,9 @@ function Login(props) {
     return (
         <div>
             {
-                !isLoggedin ? 
-                <Grid container            
+                isLoggedin === false ? 
+                <Grid container   
+                    direction = "column"         
                     justify="center"
                     alignItems="center"
                 >
@@ -90,13 +94,20 @@ function Login(props) {
             </Grid>
             : 
             <div>
-              <Card className={classes.root}>
+              <Card className={classes.root}
+              direction = "column"         
+              justify="center"
+              alignItems="center">
                 <CardActionArea>
+                  <Typography 
+                    variant="h4"
+                    align="center"
+                    >User Details</Typography>
                   <CardMedia
                    
                     className={classes.media}
                     image={imageUrl}
-                    title="user-pic"
+                    title={firstName}
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -111,7 +122,7 @@ function Login(props) {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary" variant="outlined" onClick={moveTo}>
+                  <Button size="small" color="primary" variant="outlined" onClick={moveTo} className={classes.button}>
                     Next
                   </Button>                  
                 </CardActions>
